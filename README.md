@@ -1,2 +1,2 @@
 # OZweb
-My personal website use Hugo Apero
+My personal website use Hugo Apero.
