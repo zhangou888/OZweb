@@ -1,0 +1,218 @@
+baseURL = "https://ouzhang.me"
+
+theme = "hugo-apero"
+languageCode = "en"
+title = "Ou Zhang"
+author = "Ou Zhang"
+
+
+# copyright = "&copy; Ou Zhang, 2012 - {year}"
+#copyright = """
+#<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+#<img style="display:block;margin: 0 auto" class="display-centered" alt="Creative Commons License"
+#src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+#</a>
+#<br />
+#<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">
+#This work</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="/" property="cc:attributionName"
+#rel="cc:attributionURL">&copy Ou Zhang </a> is licensed under a <a rel="license"
+#href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>."""
+
+googleAnalytics = "UA-20293236-2"
+
+disqusShortname = "" # see params.utterances to use utterances instead of Disqus
+metaDataFormat = "yaml"
+footnoteReturnLinkContents = "&#8617;" # ↩
+
+# set deliberately low for testing choose your preffered number based on the blog layout you've chosen
+paginate = 5
+preserveTaxonomyNames = true
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.knit\\.md$", "\\.utf8\\.md$"]
+enableEmoji = true
+
+[markup]
+  defaultMarkdownHandler = "goldmark"
+  [markup.goldmark.renderer]
+    unsafe = true  # Enable user to embed HTML snippets in Markdown content.
+    hardwraps = false 
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 2
+    ordered = false
+  [markup.highlight]
+    # one of: https://xyproto.github.io/splash/docs/ 
+    style = "github"
+    
+[params]
+  orgName = "Ou Zhang"
+  orgLocal = "San Antonio"
+  description = "Model Analyst at The USAA."
+  # favicon = "/img/favicon.ico"
+  favicon = "/img/icon-32.png"
+  
+  logo = "/img/icon-512.png"
+  # logo = "/img/blogophonic-mark-dark.png"
+  
+  mainSections = ["blog", "project", "talk", "Resources"]
+  navallcaps = true
+  
+  # show/hide social icons in site header & footer
+  # configure social icons and links below in [[params.social]]
+  socialInHeader = false
+  socialInFooter = true
+  # Default image for social sharing and search engines. 
+  # Place image file in `static` folder and specify image name here.
+  # sharing_image = "/img/papillons.jpg"
+  
+  sharing_image = "/img/icon-192.png"
+  # Twitter username (without @). Used when a visitor shares your site on Twitter.
+  twitter = "zhangou888"
+  
+  # use a built-in color theme
+  # one of: forest / grayscale / peach / plum /
+  #         poppy / sky / violet / water 
+  theme = "sky"
+  
+  # or, leave theme empty & make your own palette
+  # see docs at https://hugo-apero.netlify.app/blog/color-themes/
+  # the custom scss file must be in the assets/ folder
+  # add the filename name here, without extension
+  # to use hex colors instead of named tachyons colors, include "hex" in filename
+  custom_theme = "" 
+  
+  # use an embedded font-family
+  # serif options: Fraunces / EB Garamond / Bitter
+  # sans-serif options: Commissioner / Alegreya Sans / Metropolis
+  # if you import your own fonts, name them here too
+  customtextFontFamily = "Commissioner"
+  customheadingFontFamily = "Fraunces"
+  # alternatively, leave empty and select basic font options: sans-serif or serif
+  # for more http://tachyons.io/docs/typography/font-family/
+  textFontFamily = "sans-serif"
+  headingFontFamily = "sans-serif"
+
+  # Configuration of https://utteranc.es/ for comments
+  [params.utterances]
+    use_utterances = true
+    repo_name = "zhangou888/OZweb"
+    issue_term = "pathname" # url, pathname, or title
+    theme = "boxy-light"
+    label = "comments :crystal_ball:"
+
+  # Social icons may appear on homepage and in site header or footer
+  # Configure show/hide above - add as many as you like below
+  # Icon pack "fab" includes brand icons, see: https://fontawesome.com/icons?d=gallery&s=brands&m=free
+  # Icon pack "fas" includes solid icons, see: https://fontawesome.com/icons?d=gallery&s=solid&m=free
+  # Icon pack "far" includes regular icons, see: https://fontawesome.com/icons?d=gallery&s=regular&m=free
+  [[params.social]]
+      icon      = "at" # icon name without the 'fa-'
+      icon_pack = "fas"
+      url       = "/contact/"
+  [[params.social]]
+      icon      = "github" # icon name without the 'fa-'
+      icon_pack = "fab"
+      url       = "https://github.com/zhangou888"
+  [[params.social]]
+      icon      = "facebook-square" # icon name without the 'fa-'
+      icon_pack = "fab"
+      url       = "https://www.facebook.com/zhango/"
+  [[params.social]]
+      icon      = "instagram" # icon name without the 'fa-'
+      icon_pack = "fab"
+      url       = "https://www.instagram.com/zhangou888/"
+  [[params.social]]
+      icon      = "twitter" # icon name without the 'fa-'
+      icon_pack = "fab"
+      url       = "https://twitter.com/zhangou888"
+  [[params.social]]
+      icon      = "google-scholar" # icon name without the 'fa-'
+      icon_pack = "ai"
+      url       = "https://scholar.google.com/citations?user=aIZ3uysAAAAJ&hl=en"
+  [[params.social]]
+      icon      = "stack-exchange" # icon name without the 'fa-'
+      icon_pack = "fab"
+      url       = "https://stackoverflow.com/users/11401573/ou-zhang"
+  [[params.social]]
+      icon      = "linkedin-in" # icon name without the 'fa-'
+      icon_pack = "fab"
+      url       = "https://www.linkedin.com/in/zhangou/"
+
+[taxonomies]
+  category = "categories"
+  series = "series"
+  tag = "tags"
+
+[menu]
+  # Configure header 
+  [[menu.header]]
+    name = "About"
+    title = "About me"
+    url = "/about/"
+    weight = 1
+  [[menu.header]]
+    name = "Blog"
+    title = "Place I write words"
+    url = "/blog/"
+    weight = 2
+  [[menu.header]]
+    name = "Projects"
+    title = "Projects"
+    url = "/project/"
+    weight = 3
+  [[menu.header]]
+    name = "Talks"
+    title = "Talks"
+    url = "/talk/"
+    weight = 4
+  [[menu.header]]
+    name = "Publications"
+    title = "A collection"
+    url = "/collection/"
+    weight = 5
+  [[menu.header]]
+    name = "Resources"
+    title = "Element Page"
+    url = "/elements/"
+    weight = 6
+    
+    
+  # Configure footer  
+  [[menu.footer]]
+    name = "License"
+    title = "License"
+    url = "/license/"
+    weight = 1
+  [[menu.footer]]
+    name = "Contact"
+    title = "Contact form"
+    url = "/contact/"
+    weight = 2
+    
+# [[menu.footer]]
+#    name = "Contributors"
+#    title = "Contributors"
+#    url = "/contributors/"
+#    weight = 3
+
+# see https://gohugo.io/about/hugo-and-gdpr/    
+[privacy]
+  [privacy.disqus]
+    disable = false
+  [privacy.googleAnalytics]
+    disable = false
+    anonymizeIP = true
+    respectDoNotTrack = true
+  [privacy.instagram]
+    disable = false
+    simple = true
+  [privacy.twitter]
+    disable = false
+    enableDNT = true
+    simple = false
+  [privacy.vimeo]
+    disable = false
+    enableDNT = true
+    simple = true
+  [privacy.youtube]
+    disable = false
+    privacyEnhanced = true
