@@ -167,12 +167,12 @@ enableEmoji = true
   [[menu.header]]
     name = "Publications"
     title = "A collection"
-    url = "/collection/"
+    url = "/publication/"
     weight = 5
   [[menu.header]]
     name = "Resources"
-    title = "Element Page"
-    url = "/elements/"
+    title = "Resources"
+    url = "/resource/"
     weight = 6
     
     

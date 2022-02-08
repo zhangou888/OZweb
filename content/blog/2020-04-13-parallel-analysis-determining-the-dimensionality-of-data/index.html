@@ -1,0 +1,343 @@
+---
+title: 'Parallel Analysis: Determining the Dimensionality of Data'
+author: Ou Zhang
+date: '2020-04-13'
+slug: parallel-analysis-determining-the-dimensionality-of-data
+draft: no
+categories: 
+  - Psychometrics
+  - SAS
+  - R
+tags:
+  - Psychometrics
+  - R
+  - Other
+subtitle: ''
+summary: ''
+authors: []
+lastmod: '2020-04-13T23:53:01-05:00'
+featured: no
+disable_jquery: no
+image:
+  caption: ''
+  focal_point: 'Smart'
+  preview_only: no
+projects: []
+output:
+  blogdown::html_page:
+    toc: yes
+    number_sections: yes
+    toc_depth: 1
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#what-is-parallel-analysis"><span class="toc-section-number">1</span> WHAT IS PARALLEL ANALYSIS</a></li>
+<li><a href="#methodology"><span class="toc-section-number">2</span> METHODOLOGY</a></li>
+<li><a href="#parallel-analysis-in-r"><span class="toc-section-number">3</span> PARALLEL ANALYSIS IN R</a></li>
+</ul>
+</div>
+
+<p>Recently, my colleague asked me to review a state assessment tech report. In the tech report, a section-“Parallel Analysis” really caught my eyes.</p>
+<p>I have done parallel analysis multiple times in the past. However, I have never thought about this topic in a systematical way. It is always a good memory refreshing opportunity.</p>
+<p>Therefore, I take this tech report reviewing opportunity to dig down the parallel analysis. The first thing I did is searching materials on internet and creating some source code in both <code>SAS</code> and <code>R</code>. Fortunately, there are a lot of information online. After 2 hours searching and reading, I’ve filtered some introductions and materials I thought might be useful for me and you for the possible parallel analysis in the future.</p>
+<p>So, before I start sharing materials, let me give you a brief introduction about what is parallel analysis. And how are we going to use it in our analysis.</p>
+<div id="what-is-parallel-analysis" class="section level1">
+<h1><span class="header-section-number">1</span> WHAT IS PARALLEL ANALYSIS</h1>
+<p>When we operate factor analysis, the first decision that we will face in our factor analysis is the decision as to the number of factors that we will need to extract, in order to achieve the most parsimonious (but still interpretatable) factor structure.</p>
+<p>There are a number of methods that we could use, but the two most commonly employed methods are the <strong>scree plot</strong>, and <strong>parallel analysis</strong>.</p>
+<p>So here’s how parallel analysis helps you to decide how may factors to retain. You start with creating a scree plot, in which you plot the eigenvalues (variance explained), in descending order, of each factor you could conceivably extract. The scree plot is so-named because of the scree test proposed by Cattell (1966), who suggested you could look at where the “scree”–a term for rubble at the base of a hill–begins, in order to determine how many factors are necessary to retain.</p>
+<p>Sometimes this scree test is a legitimately helpful tool for making factor retention decision, but this is most often in cases when scree plots are painfully obvious as to where there is a huge drop and levelling-off of eigenvalues. And as we shall soon see, there are often cases where the beginning of the “scree” is not so easy to identify in a scree plot. In those cases, the scree test is highly subjective at best, and simply uninformative at worst.</p>
+<p>Parallel analysis (introduced by Horn, 1965) is a technique designed to help take some of the subjectivity out of interpreting the scree plot. It is a simulation-based method, and the logic is pretty straightforward:</p>
+</div>
+<div id="methodology" class="section level1">
+<h1><span class="header-section-number">2</span> METHODOLOGY</h1>
+<p>Let <code>N</code> represent the number of observations in the dataset, and <code>p</code> represent the number of variables. In general, parallel analysis is completed as follows:</p>
+<ol style="list-style-type: decimal">
+<li><p>Calculate the <code>p x p</code> sample correlation matrix from the <code>N x p</code> sample dataset. Create a scree plot by plotting the eigenvalues of the sample correlation matrix against their position from largest to smallest (<code>1, 2,…,p</code>) and connecting the points with straight lines</p></li>
+<li><p>Generate a simulated dataset with N observations randomly sampled from <code>p</code> independent normal variates. Calculate the <code>p x p</code> correlation matrix for this simulated data and extract the p eigenvalues and order them from largest (position <code>1</code>) to smallest (position <code>p</code>).</p></li>
+<li><p>Repeat step 2, <code>k</code> times (e.g., <code>k = 1000</code>).</p></li>
+<li><p>Calculate the median of the of the k eigenvalues at position 1 from steps 2-3, the median of the <code>k</code> largest <code>eigenvalues</code> at position <code>2</code>, …, up to the median of the <code>k</code> eigenvalues at position <code>p</code>.</p></li>
+<li><p>Overlay these medians from step 4 on the scree plot created in step 1, connecting the points.</p></li>
+<li><p>The intersection of the two lines is the cutoff for determining the number of dimensions present in the data.</p></li>
+</ol>
+<p><em>Note: other summary statistics can be used in place of the median at step 4 (e.g., 99th percentile, 95th percentile, etc.).</em></p>
+<div id="parallel-analysis-in-sas" class="section level2">
+<h2><span class="header-section-number">2.1</span> PARALLEL ANALYSIS IN SAS</h2>
+<p>In a few minutes, I’ve found a very useful resource online. Kabacoff (2003) published a paper in SAS conference-“Determining the dimensionality of Data: A SAS Macro for Parallel Analysis”. This paper mainly introduce a macro that you can use it to operate parallel analysis.</p>
+<p>You can find his paper <a href="https://github.com/zhangou888/parallel_analysis/blob/master/sas/%5Bsas%5Ddetermine_the_dimensionality_of_data_macro_for_parallel_analysis.pdf">here</a></p>
+<p>I’ve also reformatted and modified his macro code and it can be download via this <a href="https://github.com/zhangou888/parallel_analysis/blob/master/sas/parallel_analysis_macro.sas">link</a>.</p>
+</div>
+</div>
+<div id="parallel-analysis-in-r" class="section level1">
+<h1><span class="header-section-number">3</span> PARALLEL ANALYSIS IN R</h1>
+<p>Various R-packages include functions that can conduct parallel analysis. Among all of them, 2 packages are worthwhile to be introduced- <code>paran</code>(Alexis Dinno, 2015), and <code>psych</code> (William Revelle, 2017).</p>
+<p>You can find some parallel analysis R code example below.</p>
+<div id="paran-package-example" class="section level2">
+<h2><span class="header-section-number">3.1</span> paran package example</h2>
+<p>The key option in the <code>paran</code> function is its centile option.
+By default, the centile option is set as <span class="math inline">\(50%\)</span>. However, the traditional centile is usually set as <span class="math inline">\(95%\)</span> or <span class="math inline">\(99%\)</span>.</p>
+<pre class="r"><code>library(paran)
+# -----  Example 1: package - paran --- #
+data(&quot;USArrests&quot;)
+
+## perform a standard parallel analysis on the US Arrest data 
+# using 50% percentile.
+paran(USArrests, iterations=5000)</code></pre>
+<pre><code>## 
+## Using eigendecomposition of correlation matrix.
+## Computing: 10%  20%  30%  40%  50%  60%  70%  80%  90%  100%
+## 
+## 
+## Results of Horn&#39;s Parallel Analysis for component retention
+## 5000 iterations, using the mean estimate
+## 
+## -------------------------------------------------- 
+## Component   Adjusted    Unadjusted    Estimated 
+##             Eigenvalue  Eigenvalue    Bias 
+## -------------------------------------------------- 
+## 1           2.158486    2.480241      0.321754
+## -------------------------------------------------- 
+## 
+## Adjusted eigenvalues &gt; 1 indicate dimensions to retain.
+## (1 components retained)</code></pre>
+<pre class="r"><code>## a conservative analysis with different result (95% and 99%)
+paran(USArrests, iterations=5000, centile=95)</code></pre>
+<pre><code>## 
+## Using eigendecomposition of correlation matrix.
+## Computing: 10%  20%  30%  40%  50%  60%  70%  80%  90%  100%
+## 
+## 
+## Results of Horn&#39;s Parallel Analysis for component retention
+## 5000 iterations, using the 95 centile estimate
+## 
+## -------------------------------------------------- 
+## Component   Adjusted    Unadjusted    Estimated 
+##             Eigenvalue  Eigenvalue    Bias 
+## -------------------------------------------------- 
+## 1           1.960516    2.480241      0.519724
+## -------------------------------------------------- 
+## 
+## Adjusted eigenvalues &gt; 1 indicate dimensions to retain.
+## (1 components retained)</code></pre>
+</div>
+<div id="psych-package-example" class="section level2">
+<h2><span class="header-section-number">3.2</span> psych package example</h2>
+<p>The 2nd parallel analysis example is from a factor anlaysis tutorial document by Rachael Smyth and Andrew Johnson.</p>
+<p>You can find this document <a href="https://github.com/zhangou888/parallel_analysis/blob/master/R/%5BR_Tutorial%5D_FactorAnalysis.pdf">here</a>.</p>
+<pre class="r"><code>library(psych)
+data(&quot;bfi&quot;)
+
+# Describe data
+describe(bfi[1:25])</code></pre>
+<pre><code>##    vars    n mean   sd median trimmed  mad min max range  skew kurtosis   se
+## A1    1 2784 2.41 1.41      2    2.23 1.48   1   6     5  0.83    -0.31 0.03
+## A2    2 2773 4.80 1.17      5    4.98 1.48   1   6     5 -1.12     1.05 0.02
+## A3    3 2774 4.60 1.30      5    4.79 1.48   1   6     5 -1.00     0.44 0.02
+## A4    4 2781 4.70 1.48      5    4.93 1.48   1   6     5 -1.03     0.04 0.03
+## A5    5 2784 4.56 1.26      5    4.71 1.48   1   6     5 -0.85     0.16 0.02
+## C1    6 2779 4.50 1.24      5    4.64 1.48   1   6     5 -0.85     0.30 0.02
+## C2    7 2776 4.37 1.32      5    4.50 1.48   1   6     5 -0.74    -0.14 0.03
+## C3    8 2780 4.30 1.29      5    4.42 1.48   1   6     5 -0.69    -0.13 0.02
+## C4    9 2774 2.55 1.38      2    2.41 1.48   1   6     5  0.60    -0.62 0.03
+## C5   10 2784 3.30 1.63      3    3.25 1.48   1   6     5  0.07    -1.22 0.03
+## E1   11 2777 2.97 1.63      3    2.86 1.48   1   6     5  0.37    -1.09 0.03
+## E2   12 2784 3.14 1.61      3    3.06 1.48   1   6     5  0.22    -1.15 0.03
+## E3   13 2775 4.00 1.35      4    4.07 1.48   1   6     5 -0.47    -0.47 0.03
+## E4   14 2791 4.42 1.46      5    4.59 1.48   1   6     5 -0.82    -0.30 0.03
+## E5   15 2779 4.42 1.33      5    4.56 1.48   1   6     5 -0.78    -0.09 0.03
+## N1   16 2778 2.93 1.57      3    2.82 1.48   1   6     5  0.37    -1.01 0.03
+## N2   17 2779 3.51 1.53      4    3.51 1.48   1   6     5 -0.08    -1.05 0.03
+## N3   18 2789 3.22 1.60      3    3.16 1.48   1   6     5  0.15    -1.18 0.03
+## N4   19 2764 3.19 1.57      3    3.12 1.48   1   6     5  0.20    -1.09 0.03
+## N5   20 2771 2.97 1.62      3    2.85 1.48   1   6     5  0.37    -1.06 0.03
+## O1   21 2778 4.82 1.13      5    4.96 1.48   1   6     5 -0.90     0.43 0.02
+## O2   22 2800 2.71 1.57      2    2.56 1.48   1   6     5  0.59    -0.81 0.03
+## O3   23 2772 4.44 1.22      5    4.56 1.48   1   6     5 -0.77     0.30 0.02
+## O4   24 2786 4.89 1.22      5    5.10 1.48   1   6     5 -1.22     1.08 0.02
+## O5   25 2780 2.49 1.33      2    2.34 1.48   1   6     5  0.74    -0.24 0.03</code></pre>
+<pre class="r"><code>sum(complete.cases(bfi[1:25]))</code></pre>
+<pre><code>## [1] 2436</code></pre>
+<pre class="r"><code># Bartlett&#39;s Test of Sphericity
+# The most liberal test is Bartlett&#39;s test of sphericity - 
+# this evaluates whether or not the variables intercorrelate
+# at all, by evaluating the observed correlation matrix against an &quot;identity matrix&quot;
+# If this test is not statistically significant, you should not
+# employ a factor analysis.
+cortest.bartlett(bfi[1:25])</code></pre>
+<pre><code>## $chisq
+## [1] 20163.79
+## 
+## $p.value
+## [1] 0
+## 
+## $df
+## [1] 300</code></pre>
+<pre class="r"><code># Bartlett&#39;s test was statistically significant, suggesting that 
+# the observed correlation matrix among the items is
+# not an identity matrix.
+
+# --- Determining the Number of Factors to Extract --- #
+
+# Test 1: Scree Plot
+bfi[,1:25] %&gt;% scree()</code></pre>
+<p><img src="figure/psych1-1.png" /></p>
+<pre class="r"><code># Test 2: Parallel Analysis
+bfi[,1:25] %&gt;% fa.parallel()</code></pre>
+<pre><code>## Parallel analysis suggests that the number of factors =  6  and the number of components =  6</code></pre>
+<p><img src="figure/psych1-2.png" /></p>
+<p>I also found that a web post by Sakaluk &amp; Short (2016) provides a very good R code example using <code>psych</code> and <code>ggplot</code> to do the parallel analysis.</p>
+<p>(Sakaluk, J. K., &amp; Short, S. D. (2016). A Methodological Review of Exploratory Factor Analysis in Sexuality Research: Used Practices, Best Practices, and Data Analysis Resources. Journal of Sex Research.)</p>
+<p>You can find the web post <a href="https://sakaluk.wordpress.com/2016/05/26/11-make-it-pretty-scree-plots-and-parallel-analysis-using-psych-and-ggplot2/#parallel">here</a>.</p>
+<pre class="r"><code>library(psych)
+library(ggplot2)
+
+# STEP 1: Read-in data
+dat &lt;- msq
+keys &lt;- make.keys(msq[1:75], list(
+  EA = c(
+    &quot;active&quot;, &quot;energetic&quot;, &quot;vigorous&quot;, &quot;wakeful&quot;, &quot;wide.awake&quot;, &quot;full.of.pep&quot;,
+    &quot;lively&quot;, &quot;-sleepy&quot;, &quot;-tired&quot;, &quot;-drowsy&quot;
+  ),
+  TA = c(
+    &quot;intense&quot;, &quot;jittery&quot;, &quot;fearful&quot;, &quot;tense&quot;, &quot;clutched.up&quot;, &quot;-quiet&quot;, &quot;-still&quot;,
+    &quot;-placid&quot;, &quot;-calm&quot;, &quot;-at.rest&quot;
+  ),
+  PA = c(
+    &quot;active&quot;, &quot;excited&quot;, &quot;strong&quot;, &quot;inspired&quot;, &quot;determined&quot;, &quot;attentive&quot;,
+    &quot;interested&quot;, &quot;enthusiastic&quot;, &quot;proud&quot;, &quot;alert&quot;
+  ),
+  NAf = c(
+    &quot;jittery&quot;, &quot;nervous&quot;, &quot;scared&quot;, &quot;afraid&quot;, &quot;guilty&quot;, &quot;ashamed&quot;, &quot;distressed&quot;,
+    &quot;upset&quot;, &quot;hostile&quot;, &quot;irritable&quot;
+  ),
+  HAct = c(&quot;active&quot;, &quot;aroused&quot;, &quot;surprised&quot;, &quot;intense&quot;, &quot;astonished&quot;),
+  aPA = c(&quot;elated&quot;, &quot;excited&quot;, &quot;enthusiastic&quot;, &quot;lively&quot;),
+  uNA = c(&quot;calm&quot;, &quot;serene&quot;, &quot;relaxed&quot;, &quot;at.rest&quot;, &quot;content&quot;, &quot;at.ease&quot;),
+  pa = c(&quot;happy&quot;, &quot;warmhearted&quot;, &quot;pleased&quot;, &quot;cheerful&quot;, &quot;delighted&quot;),
+  LAct = c(&quot;quiet&quot;, &quot;inactive&quot;, &quot;idle&quot;, &quot;still&quot;, &quot;tranquil&quot;),
+  uPA = c(&quot;dull&quot;, &quot;bored&quot;, &quot;sluggish&quot;, &quot;tired&quot;, &quot;drowsy&quot;),
+  naf = c(&quot;sad&quot;, &quot;blue&quot;, &quot;unhappy&quot;, &quot;gloomy&quot;, &quot;grouchy&quot;),
+  aNA = c(&quot;jittery&quot;, &quot;anxious&quot;, &quot;nervous&quot;, &quot;fearful&quot;, &quot;distressed&quot;),
+  Fear = c(&quot;afraid&quot;, &quot;scared&quot;, &quot;nervous&quot;, &quot;jittery&quot;),
+  Hostility = c(&quot;angry&quot;, &quot;hostile&quot;, &quot;irritable&quot;, &quot;scornful&quot;),
+  Guilt = c(&quot;guilty&quot;, &quot;ashamed&quot;),
+  Sadness = c(&quot;sad&quot;, &quot;blue&quot;, &quot;lonely&quot;, &quot;alone&quot;),
+  Joviality = c(&quot;happy&quot;, &quot;delighted&quot;, &quot;cheerful&quot;, &quot;excited&quot;, &quot;enthusiastic&quot;, &quot;lively&quot;, &quot;energetic&quot;), Self.Assurance = c(&quot;proud&quot;, &quot;strong&quot;, &quot;confident&quot;, &quot;-fearful&quot;),
+  Attentiveness = c(&quot;alert&quot;, &quot;determined&quot;, &quot;attentive&quot;)
+  # acquiscence = c(&#39;sleepy&#39; , &#39;wakeful&#39; , &#39;relaxed&#39;,&#39;tense&#39;)
+))
+
+# obtain efa data
+msq.scores = scoreItems(keys,msq[1:75])
+efa.data = msq.scores$scores
+
+set.seed(123)
+parallel = fa.parallel(efa.data,      # specify our data frame;
+                       fm = &#39;ml&#39;,     # indicate that we want to estimate eigenvalues using maximum likelihood 
+                       fa = &#39;fa&#39;,     # indicate that we only want the CF eigenvalues 
+                       n.iter = 50,   # indicate that 50 times simulation for our parallel analysis;
+                       SMC = TRUE,    # indicate that we want to use squared multiple correlations (SMCs)
+                       quant = .95)   # specify that we would like the 95th quantile</code></pre>
+<pre><code>## Parallel analysis suggests that the number of factors =  16  and the number of components =  NA</code></pre>
+<p><img src="figure/psych2-1.png" /></p>
+<pre class="r"><code># ---  Making a Pretty Scree Plot with Parallel Analysis Using ggplot2 --- # 
+# STEP 1: Create data frame from observed eigenvalue data
+obs &lt;- data.frame(parallel$fa.values)
+obs$type &lt;- c(&#39;Observed Data&#39;)
+obs$num &lt;- c(row.names(obs))
+obs$num &lt;- as.numeric(obs$num)
+colnames(obs) &lt;- c(&#39;eigenvalue&#39;, &#39;type&#39;, &#39;num&#39;)
+
+# STEP 2: Calculate quantiles for eigenvalues, 
+# but only store those from simulated CF model in percentile1
+percentile &lt;- apply(parallel$values, 2, function(x) quantile(x, .95))
+min &lt;- as.numeric(nrow(obs))
+min &lt;- (4 * min) - (min - 1)
+max &lt;- as.numeric(nrow(obs))
+max &lt;- 4 * max
+percentile1 &lt;- percentile[min:max]
+
+# Create data frame called &amp;amp;amp;amp;amp;amp;quot;sim&amp;amp;amp;amp;amp;amp;quot; with simulated eigenvalue data
+sim &lt;- data.frame(percentile1)
+sim$type &lt;- c(&quot;Simulated Data (95th %ile)&quot;)
+sim$num &lt;- c(row.names(obs))
+sim$num &lt;- as.numeric(sim$num)
+colnames(sim) &lt;- c(&quot;eigenvalue&quot;, &quot;type&quot;, &quot;num&quot;)
+
+# Merge the two data frames (obs and sim) together into data frame called eigendat
+eigendat &lt;- rbind(obs, sim)
+
+# Apply ggplot2
+apatheme &lt;- theme_bw() +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    panel.background = element_blank(),
+    panel.border = element_blank(),
+    text = element_text(family = &quot;Arial&quot;),
+    legend.title = element_blank(),
+    legend.position = c(.7, .8),
+    axis.line.x = element_line(color = &quot;black&quot;),
+    axis.line.y = element_line(color = &quot;black&quot;)
+  )
+
+# Use data from eigendat. Map number of factors to x-axis, eigenvalue to y-axis, and give different data point shapes depending on whether eigenvalue is observed or simulated
+p &lt;- ggplot(eigendat, aes(x = num, y = eigenvalue, shape = type)) +
+  # Add lines connecting data points
+  geom_line() +
+  # Add the data points.
+  geom_point(size = 4) +
+  # Label the y-axis &#39;Eigenvalue&#39;
+  scale_y_continuous(name = &quot;Eigenvalue&quot;) +
+  # Label the x-axis &#39;Factor Number&#39;, and ensure that it ranges from 1-max # of factors, increasing by one with each &#39;tick&#39; mark.
+  scale_x_continuous(name = &quot;Factor Number&quot;, breaks = min(eigendat$num):max(eigendat$num)) +
+  # Manually specify the different shapes to use for actual and simulated data, in this case, white and black circles.
+  scale_shape_manual(values = c(16, 1)) +
+  # Add vertical line indicating parallel analysis suggested max # of factors to retain
+  geom_vline(xintercept = parallel$nfact, linetype = &quot;dashed&quot;) +
+  # Apply our apa-formatting theme
+  apatheme
+# Call the plot. Looks pretty!
+p</code></pre>
+<pre><code>## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
+## found in Windows font database
+
+## Warning in grid.Call(C_stringMetric, as.graphicsAnnot(x$label)): font family not
+## found in Windows font database</code></pre>
+<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database
+
+## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database</code></pre>
+<pre><code>## Warning in grid.Call.graphics(C_text, as.graphicsAnnot(x$label), x$x, x$y, :
+## font family not found in Windows font database</code></pre>
+<pre><code>## Warning in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : font
+## family not found in Windows font database</code></pre>
+<pre class="r"><code># Save a high-res version of your plot, 
+# and you&#39;ve got yourself a pretty scree plot with parallel analysis:
+# ggsave(&#39;parallel.png&#39;, width=6, height=6, unit=&#39;in&#39;, dpi=300)</code></pre>
+<p><img src="figure/psych2-2.png" /></p>
+<p>Finally, William Revelle’s <code>psych</code> package tutorial document is helpful too.</p>
+<p>You can find her paper <a href="https://github.com/zhangou888/parallel_analysis/blob/master/R/%5BR_tutorial%5D_Use%20the%20psych%20package%20for%20Factor%20Analysis%20and%20data%20reduction.pdf">here</a>.</p>
+</div>
+</div>

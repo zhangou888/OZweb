@@ -1,0 +1,97 @@
+---
+title: First blog and some words
+author: Ou Zhang
+date: '2020-02-14'
+slug: first-blog-and-some-words
+draft: no
+categories: 
+  - R
+  - Data science
+tags:
+  - R
+  - Data Science
+output:
+  blogdown::html_page:
+    toc: yes
+    fig_width: 6
+    dev: svg
+---
+
+This is the first blog I created after I put my personal website online. This is the second time I've built my personal website. Last time, when I built my first one, I was still in graduate school fighting for my dissertation. 
+
+It seems like a Déjà vu, but two websites serve as two different purposes. 
+My first website was mainly used for advertising and job hunting. But the purpose to build the second one is different. Since I've already had a great job and enjoyed what I have been doing so far, I would like to have a place to write, post, and share my thoughts, things I think are important, knowledge that I've learned, and my daily life. 
+
+The main idea to build a personal website **again** is inspired by three smart persons in our industry.
+
+These 3 smart persons either gave an interesting talk at the conference I've attended or hugely influences my research and programming study in the past years. They are [Yihui Xie](https://yihui.org/en/), [Keith McNulty](https://drkeithmcnulty.com/), and [David Robinson](http://varianceexplained.org/). 
+
+Therefore, my first blog post is dedicated to thanking them for their help and inspiration. 
+I also wish you who read my blog to be benefited from them too. Here is some brief introduction about them who influence me to build my website most.
+
+# Yihui Xie  
+
+
+```{r fig1, out.width='100%', fig.align='center', fig.pos='h', fig.cap='Yihui Xie',echo = FALSE}
+
+    knitr::include_graphics("img/yihui_xie.png", error = FALSE)
+
+```
+
+Yihui Xie is a software engineer working at RStudio, PBC. He is a well-known celebrity in the R community and a mainstream power of the R innovation since the 2010s. I have learned a lot from his R-package: knitr, Rmarkdown, Tinytex, bookdown, blogdown, xaringan.
+
+You can easily tell his influence on me from this website: 
+
+* This website is created by blogdown, a R package Yihui bulit for webpage
+* Most of my slides are created by his xaringan and Rmarkdown packages
+* A lot of my project tech reports were created by parameterized Rmarkdown/bookdown and Tinytex which I believe are 3 most important R packages for reproducible report
+
+I have also learned his fun personality, his casual life, and interesting things about his son from his [blog](https://yihui.org/en/). Yihui loves writing and this really inspires me to build a place of my own so that I can post interesting things, share things I've learned, ink important things in my life so that I won't forget in the future.
+
+I was fortunate that I met Yihui in person at RStudio:conf 2019. I have to admit that smart people always have natural Charisma.  
+
+# Keith McNulty
+
+
+```{r fig2, out.width='80%', fig.align='center', fig.pos='h', fig.cap='Keith McNulty',echo = FALSE}
+
+    knitr::include_graphics("img/Keith.PNG", error = FALSE)
+
+```
+
+I've admitted that I have never met Keith in person. But this has never stopped me to receive inspirations from him. Keith is my linkedin connection and somehow I've learned a lot from my friends and colleagues. 
+
+Keith or Dr. McNulty is the global director, People Analytics and Measurement at McKinsey & Company. You may not know him but you definitely know where he works for, right?
+
+Keith is a passionate Psychometrician (see, I found some similarities between him and me) and enthusiast of the data science. He has his [personal blog site](https://drkeithmcnulty.com/) talking about data science, people analytics. I admit that I've learned a lot and sometimes directly borrow his idea to my website, or blog-writings. 
+
+
+# David Robinson
+
+```{r fig3, out.width='80%', fig.align='center', fig.pos='h', fig.cap='David Robinson',echo = FALSE}
+
+    knitr::include_graphics("img/david_robinson.PNG", error = FALSE)
+
+```
+
+Dr. David Robinson is the principal data scientist at Heap. The idea of building a personal website was initially inspired by his keynote talk at RStudio:conf2019. His talk topic is "The unreasonable effectiveness of public work". 
+
+In his talk, Dr. Robinson laid out the reasons that blogging, open source contribution, and other forms of public work are a critical part of a data science career. I was there, 2 rows behind the podium, and started dreaming about build a website of mine.
+
+If you are interested in his talk, here is the [video link](https://rstudio.com/resources/rstudioconf-2019/the-unreasonable-effectiveness-of-public-work/).
+
+
+# Useful links
+
+Here are Yihui Xie, Keith McNulty, and David Robinson's website links:
+
+* Yihui Xie: https://yihui.org/en/
+
+* Keith McNulty: https://drkeithmcnulty.com/
+
+* David Robinson: http://varianceexplained.org/ 
+
+Thank you for reading!
+
+
+
