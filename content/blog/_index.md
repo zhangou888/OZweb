@@ -2,12 +2,12 @@
 title: Blog
 description: |
   A place where I share my thoughts, feelings, curiosity, and passion. 
-  
 author: "Ou Zhang"
 show_post_thumbnail: true
 thumbnail_left: false # for list-sidebar only
 show_author_byline: false
 show_post_date: true
+
 # for listing page layout
 layout: list-sidebar # list, list-sidebar, list-grid
 
