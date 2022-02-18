@@ -4,6 +4,10 @@ author: Ou Zhang
 date: '2020-04-13'
 slug: parallel-analysis-determining-the-dimensionality-of-data
 draft: no
+layout: single-sidebar
+show_post_thumbnail: true
+thumbnail_left: true  # for list-sidebar only
+show_author_byline: true
 categories: 
   - Psychometrics
   - SAS

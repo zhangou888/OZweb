@@ -1,9 +1,10 @@
 ---
 title: First blog and some words
+layout: single-sidebar
 author: Ou Zhang
 date: '2020-02-14'
 show_post_thumbnail: true
-thumbnail_left: true # for list-sidebar only
+thumbnail_left: true  # for list-sidebar only
 show_author_byline: true
 alias:
   - /blog/first-blog-and-some-words
