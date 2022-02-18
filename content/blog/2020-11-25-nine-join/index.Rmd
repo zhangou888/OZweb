@@ -2,6 +2,10 @@
 title: 9 Join Function Example with the R {dplyr} Package
 author: Ou Zhang
 date: '2020-11-25'
+layout: single-sidebar
+show_post_thumbnail: true
+thumbnail_left: true  # for list-sidebar only
+show_author_byline: true
 categories:
   - R
   - data wrangling
@@ -12,7 +16,7 @@ tags:
 slug: nine-join
 draft: no
 lastmod: '2020-11-25T10:59:01-05:00'
-featured: no
+featured: yes
 disable_jquery: no
 image:
   caption: ''

@@ -2,6 +2,10 @@
 title: Outliers-Part 4:Finding Outliers in a multivariated way
 author: Ou Zhang
 date: '2020-11-16'
+layout: single-sidebar
+show_post_thumbnail: true
+thumbnail_left: true  # for list-sidebar only
+show_author_byline: true
 categories:
   - R
   - Statistics
@@ -11,7 +15,7 @@ tags:
 slug: outliers-part4
 draft: no
 lastmod: '2020-11-16T09:53:01-05:00'
-featured: no
+featured: yes
 disable_jquery: no
 image:
   caption: ''
@@ -26,24 +30,28 @@ output:
 
 ---
 
-<link href="index_files/anchor-sections/anchor-sections.css" rel="stylesheet" />
-<script src="index_files/anchor-sections/anchor-sections.js"></script>
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
 
 <div id="TOC">
 <ul>
-<li><a href="#data-source"><span class="toc-section-number">1</span> Data Source</a><ul>
+<li><a href="#data-source"><span class="toc-section-number">1</span> Data Source</a>
+<ul>
 <li><a href="#variables-in-data"><span class="toc-section-number">1.1</span> Variables in Data</a></li>
 </ul></li>
-<li><a href="#model-specific-methods"><span class="toc-section-number">2</span> Model-specific methods</a><ul>
+<li><a href="#model-specific-methods"><span class="toc-section-number">2</span> Model-specific methods</a>
+<ul>
 <li><a href="#cooks-distance"><span class="toc-section-number">2.1</span> Cook’s Distance</a></li>
 <li><a href="#pareto"><span class="toc-section-number">2.2</span> Pareto</a></li>
 </ul></li>
-<li><a href="#multivariate-methods"><span class="toc-section-number">3</span> Multivariate methods</a><ul>
-<li><a href="#mahalanobis-distance"><span class="toc-section-number">3.1</span> Mahalanobis Distance</a><ul>
+<li><a href="#multivariate-methods"><span class="toc-section-number">3</span> Multivariate methods</a>
+<ul>
+<li><a href="#mahalanobis-distance"><span class="toc-section-number">3.1</span> Mahalanobis Distance</a>
+<ul>
 <li><a href="#details-about-mahalanobis-distance"><span class="toc-section-number">3.1.1</span> Details about Mahalanobis Distance</a></li>
 </ul></li>
 <li><a href="#robust-mahalanobis-distance"><span class="toc-section-number">3.2</span> Robust Mahalanobis Distance</a></li>
-<li><a href="#minimum-covariance-determinant-mcd"><span class="toc-section-number">3.3</span> Minimum Covariance Determinant (MCD)</a><ul>
+<li><a href="#minimum-covariance-determinant-mcd"><span class="toc-section-number">3.3</span> Minimum Covariance Determinant (MCD)</a>
+<ul>
 <li><a href="#robust-tolerance-ellipsoid-rte"><span class="toc-section-number">3.3.1</span> robust tolerance ellipsoid (RTE)</a></li>
 </ul></li>
 <li><a href="#invariant-coordinate-selection-ics"><span class="toc-section-number">3.4</span> Invariant Coordinate Selection (ICS)</a></li>
@@ -51,14 +59,15 @@ output:
 <li><a href="#isolation-forest"><span class="toc-section-number">3.6</span> Isolation Forest</a></li>
 <li><a href="#local-outlier-factor"><span class="toc-section-number">3.7</span> Local Outlier Factor</a></li>
 </ul></li>
-<li><a href="#check_outliers-function-in-performance-r-package"><span class="toc-section-number">4</span> ‘check_outliers’ function in {performance} R package</a><ul>
+<li><a href="#check_outliers-function-in-performance-r-package"><span class="toc-section-number">4</span> ‘check_outliers’ function in {performance} R package</a>
+<ul>
 <li><a href="#threshold-specification"><span class="toc-section-number">4.0.1</span> Threshold specification</a></li>
 </ul></li>
 <li><a href="#reference"><span class="toc-section-number">5</span> Reference</a></li>
 </ul>
 </div>
 
-<div class="figure" style="text-align: center"><span id="fig:fig1"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig1"></span>
 <img src="figure/outlier.jpg" alt="Outliers" width="60%" />
 <p class="caption">
 Figure 0.1: Outliers
@@ -70,7 +79,7 @@ Figure 0.1: Outliers
 <blockquote>
 <p>Multivariate Statistics - Simultaneous observation and analysis of more than one outcome variable.</p>
 </blockquote>
-<div id="data-source" class="section level1">
+<div id="data-source" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Data Source</h1>
 <p>The <code>Animals</code> data from the <code>MASS</code> package in R is selected for demonstration.</p>
 <pre class="r"><code># Load library and pull out data
@@ -88,7 +97,7 @@ head(Animals)</code></pre>
 ## Goat               27.66 115.0
 ## Guinea pig          1.04   5.5
 ## Dipliodocus     11700.00  50.0</code></pre>
-<div id="variables-in-data" class="section level2">
+<div id="variables-in-data" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Variables in Data</h2>
 <p>The variables for the demonstration are <strong>body weight</strong> and <strong>brain weight</strong> of Animals which are converted to its <code>log form</code> (to make highly skewed distributions less skewed)</p>
 <pre class="r"><code># Log transformation.
@@ -126,31 +135,31 @@ plot_fig</code></pre>
 </ul>
 </div>
 </div>
-<div id="model-specific-methods" class="section level1">
+<div id="model-specific-methods" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Model-specific methods</h1>
 <p>Prior to the general multivariate outlier detection method introduction, it is worth mentioning a couple of model-specific methods.</p>
-<div id="cooks-distance" class="section level2">
+<div id="cooks-distance" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Cook’s Distance</h2>
 <p>Among outlier detection methods, Cook’s distance and leverage are less common than the basic <strong>Mahalanobis distance</strong>, but still used. Cook’s distance estimates the variations in regression coefficients after removing each observation, one by one (Cook, 1977). Since Cook’s distance is in the metric of an F distribution with p and n-p degrees of freedom, the median point of the quantile distribution can be used as a cut-off (Bollen, 1985). A common approximation or heuristic is to use <code>4 divided by the numbers of observations</code>, which usually corresponds to a lower threshold (i.e., more outliers are detected). This only works for Frequentist models. For more Cook’s Distance information, please refer my previous blog (<a href="/2020/11/09/outliers-part3/">part 3</a>).</p>
 </div>
-<div id="pareto" class="section level2">
+<div id="pareto" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Pareto</h2>
 <p>Pareto is a coefficient used for for Bayesian models. The reliability and approximate convergence of Bayesian models can be assessed using the estimates for the shape parameter <span class="math inline">\(k\)</span> of the generalized Pareto distribution. If the estimated tail shape parameter k exceeds <code>0.5</code>, the user should be warned, although in practice the authors of the loo package observed good performance for values of <span class="math inline">\(k\)</span> up to <code>0.7</code> (the default threshold used by performance).</p>
 </div>
 </div>
-<div id="multivariate-methods" class="section level1">
+<div id="multivariate-methods" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Multivariate methods</h1>
-<div id="mahalanobis-distance" class="section level2">
+<div id="mahalanobis-distance" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Mahalanobis Distance</h2>
 <p><strong>Mahalanobis distance</strong> (Mahalanobis, 1930) is often used for multivariate outliers detection as this distance takes into account the shape of the observations.</p>
 <p>Mahalanobis (or generalized) distance for observation is the <strong>distance from this observation to the center</strong>, <em>taking into account the covariance matrix</em>.</p>
-<div class="figure" style="text-align: center"><span id="fig:fig2"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig2"></span>
 <img src="figure/mahalanobis.png" alt="Outliers" width="60%" />
 <p class="caption">
 Figure 3.1: Outliers
 </p>
 </div>
-<div id="details-about-mahalanobis-distance" class="section level3">
+<div id="details-about-mahalanobis-distance" class="section level3" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Details about Mahalanobis Distance</h3>
 <ul>
 <li><p>Classical Mahalanobis distances: sample mean as estimate for location and sample covariance matrix as estimate for scatter.</p></li>
@@ -246,7 +255,7 @@ maha_dist(mtcars)</code></pre>
 <pre class="r"><code>  ## anything here will run</code></pre>
 </div>
 </div>
-<div id="robust-mahalanobis-distance" class="section level2">
+<div id="robust-mahalanobis-distance" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Robust Mahalanobis Distance</h2>
 <p>A robust version of Mahalanobis distance using an Orthogonalized Gnanadesikan-Kettenring pairwise estimator (Gnanadesikan &amp; Kettenring, 1972).
 <code>check_outliers</code> function in <code>{performance}</code> package has ‘Robust Mahalanobis Distance’ option. The <code>bigutilsr</code> package is required to apply this option.</p>
@@ -281,7 +290,7 @@ datamcd &lt;- CovMcd(hbk.x)
 rrcov::plot(datamcd)</code></pre>
 <p><img src="figure/plot.mcd-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
-<div id="minimum-covariance-determinant-mcd" class="section level2">
+<div id="minimum-covariance-determinant-mcd" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Minimum Covariance Determinant (MCD)</h2>
 <p>Another robust version of Mahalanobis. Leys et al. (2018) argue that Mahalanobis Distance is not a robust way to determine outliers, as it uses the means and covariances of all the data – including the outliers – to determine individual difference scores.</p>
 <p>Minimum Covariance Determinant calculates the mean and covariance matrix based on the most central subset of the data (by default, <code>66%</code>), before computing the Mahalanobis Distance. This is deemed to be a more robust method of identifying and removing outliers than regular Mahalanobis distance.</p>
@@ -303,7 +312,7 @@ Y_mcd$cov</code></pre>
 ## body  18.85849 14.16031
 ## brain 14.16031 11.03351</code></pre>
 <p>By plugging in these robust estimates of location and scatter in the definition of the Mahalanobis distances, we obtain <strong>robust distances</strong> and can create a <strong>robust tolerance ellipsoid (RTE)</strong>.</p>
-<div id="robust-tolerance-ellipsoid-rte" class="section level3">
+<div id="robust-tolerance-ellipsoid-rte" class="section level3" number="3.3.1">
 <h3><span class="header-section-number">3.3.1</span> robust tolerance ellipsoid (RTE)</h3>
 <pre class="r"><code>Y_mcd &lt;- robustbase::covMcd(Y)
 ellipse_mcd &lt;- data.frame(car::ellipse(center = Y_mcd$center,
@@ -324,7 +333,7 @@ The distance-distance plot shows the robust distance of each observation versus 
 <p><img src="figure/dd_plot-1.png" width="576" style="display: block; margin: auto;" /></p>
 </div>
 </div>
-<div id="invariant-coordinate-selection-ics" class="section level2">
+<div id="invariant-coordinate-selection-ics" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Invariant Coordinate Selection (ICS)</h2>
 <p>The outlier are detected using ICS, which by default uses an alpha threshold of <code>0.025</code> (corresponding to the <code>2.5%</code> most extreme observations) as a cut-off value for outliers classification. The ICS coefficient can be calculated through <code>ics.outlier()</code> function from <code>{ICSOutlier}</code>. Please refer to the help-file of <a href="https://rdrr.io/cran/ICSOutlier/man/ics.outlier.html">ICSOutlier::ics.outlier()</a> to get more details about this procedure. Note that <code>method = "ics"</code> requires both <code>ICS</code> and <code>ICSOutlier</code> to be installed, and that it takes some time to compute the results.</p>
 <pre class="r"><code>library(ICSOutlier)
@@ -353,20 +362,20 @@ summary(icsOutlierAG)</code></pre>
 <p><img src="figure/ics-1.png" width="576" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>rm(.Random.seed)</code></pre>
 </div>
-<div id="optics" class="section level2">
+<div id="optics" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> OPTICS</h2>
 <p>The Ordering Points To Identify the <strong>Clustering Structure (OPTICS)</strong> algorithm (Ankerst et al., 1999) is using similar concepts to <strong>DBSCAN</strong> (an unsupervised clustering technique that can be used for outliers detection). The threshold argument is passed as minPts, which corresponds to the minimum size of a cluster. By default, this size is set at 2 times the number of columns (Sander et al., 1998). Compared to the others techniques, that will always detect several outliers (as these are usually defined as a percentage of extreme values), the <code>check_outliers</code> function in <code>{performance}</code> package in a different manner and won’t always detect outliers. Note that <code>method = "optics"</code> requires the <strong>dbscan</strong> package to be installed, and that it takes some time to compute the results.</p>
 </div>
-<div id="isolation-forest" class="section level2">
+<div id="isolation-forest" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Isolation Forest</h2>
 <p>The outliers are detected using the anomaly score of an isolation forest (a class of random forest). The default threshold of <code>0.025</code> will classify as outliers the observations located at <code>qnorm(1-0.025) * MAD</code>) (a robust equivalent of SD) of the median (roughly corresponding to the <code>2.5%</code> most extreme observations). Requires the solitude package.</p>
 </div>
-<div id="local-outlier-factor" class="section level2">
+<div id="local-outlier-factor" class="section level2" number="3.7">
 <h2><span class="header-section-number">3.7</span> Local Outlier Factor</h2>
 <p>Based on a <code>K</code> nearest neighbours algorithm, LOF compares the local density of an point to the local densities of its neighbors instead of computing a distance from the center (Breunig et al., 2000). Points that have a substantially lower density than their neighbors are considered outliers. A LOF score of approximately 1 indicates that density around the point is comparable to its neighbors. Scores significantly larger than 1 indicate outliers. The default threshold of <code>0.025</code> will classify as outliers the observations located at <span class="math inline">\(qnorm(1-0.025) \times SD\)</span>) of the log-transformed LOF distance. Requires the <code>dbscan</code> package.</p>
 </div>
 </div>
-<div id="check_outliers-function-in-performance-r-package" class="section level1">
+<div id="check_outliers-function-in-performance-r-package" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> ‘check_outliers’ function in {performance} R package</h1>
 <p>The <code>check_outliers</code> function in the <code>{performance}</code> package (Lüdecke et al., 2019) contains multiple composite outlier score detection methods and is worthy of mention.</p>
 <p>You can find the function details from the below link.</p>
@@ -395,7 +404,7 @@ ol &lt;- check_outliers(model1)
 
 
 check_outliers(model1, method = c(&quot;mahalabonis&quot;, &quot;mcd&quot;))</code></pre>
-<pre><code>## Warning: 6 outliers detected (cases 18, 20, 28, 31, 33, 34).</code></pre>
+<pre><code>## Error in MASS::cov.rob(x, quantile.used = percentage_central * nrow(x), : at least one column has IQR 0</code></pre>
 <pre class="r"><code>#&gt; Warning: 6 outliers detected (cases 18, 20, 28, 31, 33, 34).
 #&gt; 
 if (FALSE) {
@@ -406,7 +415,7 @@ check_outliers(model1, method = &quot;ics&quot;)
 check_outliers(mtcars)
 check_outliers(mtcars, method = &quot;all&quot;)
 }</code></pre>
-<div id="threshold-specification" class="section level3">
+<div id="threshold-specification" class="section level3" number="4.0.1">
 <h3><span class="header-section-number">4.0.1</span> Threshold specification</h3>
 <pre class="r"><code># list of default Threshold specification. 
 list(zscore = stats::qnorm(p = 1 - 0.025), 
@@ -426,7 +435,7 @@ list(zscore = stats::qnorm(p = 1 - 0.025),
 <p>– To be Continued</p>
 </div>
 </div>
-<div id="reference" class="section level1">
+<div id="reference" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> Reference</h1>
 <ul>
 <li><p>Archimbaud, A., Nordhausen, K., &amp; Ruiz-Gazen, A. (2018). ICS for multivariate outlier detection with application to quality control. Computational Statistics &amp; Data Analysis, 128, 184–199. doi: 10.1016/j.csda.2018.06.011</p></li>

@@ -2,6 +2,10 @@
 title: Outliers-Part 3:Outliers in Regression
 author: Ou Zhang
 date: '2020-11-09'
+layout: single-sidebar
+show_post_thumbnail: true
+thumbnail_left: true  # for list-sidebar only
+show_author_byline: true
 categories:
   - R
   - Statistics
@@ -11,7 +15,7 @@ tags:
 slug: outliers-part3
 draft: no
 lastmod: '2020-11-09T23:53:01-05:00'
-featured: no
+featured: yes
 disable_jquery: no
 image:
   caption: ''
