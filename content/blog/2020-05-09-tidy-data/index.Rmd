@@ -28,7 +28,7 @@ projects: []
 output:
   blogdown::html_page:
     toc: false
-    number_sections: yes
+    number_sections: no
     toc_depth: 3
 ---
 

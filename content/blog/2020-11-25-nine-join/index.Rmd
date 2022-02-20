@@ -1,5 +1,5 @@
 ---
-title: 9 Join Function Example with the R {dplyr} Package
+title: '9 Join Function Example with the R {dplyr} Package'
 author: Ou Zhang
 date: '2020-11-25'
 layout: single-sidebar
@@ -25,7 +25,7 @@ image:
 output:
   blogdown::html_page:
     toc: yes
-    number_sections: yes
+    number_sections: no
     toc_depth: 1
     self_contained: no
 

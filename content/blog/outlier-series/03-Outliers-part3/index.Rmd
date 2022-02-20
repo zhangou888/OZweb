@@ -24,7 +24,7 @@ image:
 output:
   blogdown::html_page:
     toc: yes
-    number_sections: yes
+    number_sections: no
     toc_depth: 4
     self_contained: no
 

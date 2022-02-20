@@ -43,7 +43,8 @@ enableEmoji = true
     ordered = false
   [markup.highlight]
     # one of: https://xyproto.github.io/splash/docs/ 
-    style = "github"
+    style = "native" #arduino / github
+    # noClasses = false
     
 # Syntax highlighting
 pygmentsUseClasses = true  # use class names instead of directly inserting color codes
@@ -57,6 +58,9 @@ pygmentsUseClasses = true  # use class names instead of directly inserting color
   favicon = "/img/icon-32.png"
   
   logo = "/img/icon-512.png"
+  
+ 
+    
   # logo = "/img/blogophonic-mark-dark.png"
   
   mainSections = ["blog", "project", "talk", "Resources"]
@@ -77,14 +81,15 @@ pygmentsUseClasses = true  # use class names instead of directly inserting color
   # use a built-in color theme
   # one of: forest / grayscale / peach / plum /
   #         poppy / sky / violet / water 
-  theme = "sky"
+  theme = "water"
   
   # or, leave theme empty & make your own palette
   # see docs at https://hugo-apero.netlify.app/blog/color-themes/
   # the custom scss file must be in the assets/ folder
   # add the filename name here, without extension
   # to use hex colors instead of named tachyons colors, include "hex" in filename
-  #custom_theme = "silvia-hex.scss" 
+  # custom_theme = "silvia-hex.scss" 
+  # custom_theme = "hex-colors" 
   
   # use an embedded font-family
   # serif options: Fraunces / EB Garamond / Bitter
@@ -104,6 +109,9 @@ pygmentsUseClasses = true  # use class names instead of directly inserting color
     issue_term = "pathname" # url, pathname, or title
     theme = "boxy-light"
     label = "comments :crystal_ball:"
+  #configuration of math rendering
+  [params.math]
+    renderer = "katex" # one of "mathjax" / "Katex"
 
   # Social icons may appear on homepage and in site header or footer
   # Configure show/hide above - add as many as you like below
