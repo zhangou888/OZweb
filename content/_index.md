@@ -5,6 +5,12 @@ action_type: text
 description: Hi, my name is Ou Zhang (张欧).  Currently, I am a model analyst at [USAA](https://www.usaa.com/). My current work mainly focuses on data science and statistical modeling. 
 
 
+ This is my new personal website.  
+ 
+ 
+ Please check my [old site](https://ouzhang.rbind.io).
+
+
   
 image_left: false
 images:
