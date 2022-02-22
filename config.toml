@@ -1,6 +1,6 @@
-baseURL = "https://ozhang.netlify.app/"
+# baseURL = "https://ozhang.netlify.app/"
 
-# baseURL = "https://ouzhang.me"
+baseURL = "https://ouzhang.me"
 
 theme = "hugo-apero"
 languageCode = "en"
