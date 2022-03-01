@@ -7,7 +7,7 @@ description: Hi, my name is Ou Zhang (张欧).  Currently, I am a model analyst 
 
  This is my new personal website. It has been updated by using Hugo Apero. 
  
- My old website used hugo academic theme, but it stops updating. So, I switch。
+ My old website used hugo academic theme, but it stops updating. So, I switch.
  
  If you want, you can still view my [old site](https://ouzhang.rbind.io).
 
