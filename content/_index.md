@@ -5,10 +5,11 @@ action_type: text
 description: Hi, my name is Ou Zhang (张欧).  Currently, I am a model analyst at [USAA](https://www.usaa.com/). My current work mainly focuses on data science and statistical modeling. 
 
 
- This is my new personal website.  
+ This is my new personal website. It has been updated by using Hugo Apero. 
  
+ My old website used hugo academic theme, but it stops updating. So, I switch。
  
- Please check my [old site](https://ouzhang.rbind.io).
+ If you want, you can still view my [old site](https://ouzhang.rbind.io).
 
 
   
