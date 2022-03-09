@@ -27,14 +27,31 @@ image:
 projects: []
 output:
   blogdown::html_page:
-    toc: false
+    toc: true
     number_sections: no
     toc_depth: 3
 ---
 
 <script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
 
+<div id="TOC">
+<ul>
+<li><a href="#what-is-tidy-data">What is Tidy data？</a></li>
+<li><a href="#why-is-it-important">Why is it important?</a></li>
+<li><a href="#fixed-variable-vs.-measured-variable">Fixed variable vs. Measured variable</a></li>
+<li><a href="#is-such-a-data-set-tidy">Is such a data set <strong>tidy</strong>?</a>
+<ul>
+<li><a href="#example-1">Example 1:</a></li>
+<li><a href="#example-2">Example 2:</a></li>
+<li><a href="#example-3">Example 3:</a></li>
+<li><a href="#code-examples">Code Examples</a></li>
+</ul></li>
+<li><a href="#traditional-measurement-testing-dataset">Traditional measurement testing dataset</a></li>
+</ul>
+</div>
 
+<!-- adding here-bot cat -->
+<p>{{<here>}}</p>
 <p>In an ideal world, a data analysis process is as simple as-<code>read in data, select a suitable model to fit in data, obtain statistical estimates, and finally, interpret the analysis results</code>. Sounds simple and straight forward, isn’t it?</p>
 <p>But, in reality, it’s often not that simple!Data is always messy and often times we need to clean our data before we can make any sense of it. Moreover, some researchers found that more than <code>80%</code> of data analysis is actually spent on data preparation or data manipulation (Dasu &amp; Johnson, 2003), so that the data is transformed into a usable format before you even think about analysis.</p>
 <p>Therefore, data cleaning or data wrangling is utmost important for any data analysis or data science project.</p>

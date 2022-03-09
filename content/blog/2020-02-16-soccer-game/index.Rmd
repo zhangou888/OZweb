@@ -26,6 +26,8 @@ output:
     fig_width: 6
     dev: svg
 ---
+<!-- adding here-bot cat -->
+{{<here>}}  
 
 Today is Sunday 2-16-2020.
  

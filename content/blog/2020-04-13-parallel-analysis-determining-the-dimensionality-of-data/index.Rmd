@@ -64,6 +64,9 @@ packages <- lapply(packages, FUN = function(x) {
 
 ```
 
+<!-- adding here-bot cat -->
+{{<here>}}  
+
 Recently, my colleague asked me to review a state assessment tech report. In the tech report, a section-"Parallel Analysis" really caught my eyes.  
 
 I have done parallel analysis multiple times in the past. However, I have never thought about this topic in a systematical way. It is always a good memory refreshing opportunity.  

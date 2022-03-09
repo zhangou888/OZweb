@@ -76,6 +76,9 @@ library(rcfss)
 
 ```
 
+<!-- adding here-bot cat -->
+{{<here>}}  
+
 Instead of introducing `tidyr` and `dplyr` packages-two most essential R packages for data wrangling, I would like to insert a side topic that I think it's worth to mention for R programming efficiency as my 2nd `Tidyverse` blog ^[The basic `%>%` pipe is automatically imported as part of the `tidyverse` library. If you wish to use any of the extra tools from `magrittr` as demonstrated in R for Data Science, you need to explicitly load `magrittr`.]. To me, this important programming command completely changes my view of programming and reshapes my programming habit since I used it. This magic command is `%>%`, a.k.a: the `pipe operator`.
 
 >  The hot key for `%>%` in RStudio is `Ctrl` + `Shift` + `M`.
