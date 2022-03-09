@@ -30,7 +30,8 @@ output:
 
 ---
 
-
+<!-- adding here-bot cat -->
+{{<here>}}  
 
 ```{r set-global-options, echo = FALSE}
 knitr::opts_chunk$set(eval = TRUE, 
