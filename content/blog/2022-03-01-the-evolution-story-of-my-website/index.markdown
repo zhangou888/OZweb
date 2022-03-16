@@ -41,28 +41,30 @@ output:
 
 # My website story  
 
-If you see this blog, congratulations👏, you've already found my website. So, you don't need to continue reading this blog 😄.
+If you are reading this blog, congratulations👏, you've already found my website. So, you don't need to continue reading this blog 😄.
 
-Let me give you a little bit back-scene story of my website building history.   
-I've always wanted to have my personal website so that I could have a place to chat and to record my life. My first website was built back to my graduate school era (2011). It was completely built by `html` through **Dreamweaver**, with some `css` style helps from my friend. The website content is static and has no dynamic data exchanging feature at all. The site is simply a showcase to my studies and works.   
+Let me give you some back-scene stories of my website building history.   
+I've always wanted to have my personal website so that I could have a place to chat and record my life. 
 
-Luckily, this simple `html` website, to some extent, helped me land my first job in US. Back to the old days, building a website required huge amount of time to carve details in style (e.g., `css`), and micro-monitoring the html parameters. It is hard to build and hard to maintain a website like that. The site was built and hosted on the school's platform. Unfortunately, soon after my graduation, it is expired and could never be retrieved. 
+My first website was built back to my graduate school era (2011). It was completely built by `html` through **Dreamweaver**, with some `css` style helps from my friend. The website content is static and has no dynamic data exchanging feature at all. The site is simply a showcase to my studies and works. I hope maybe the recruiters and my future employers could know me more through my website.  Luckily, this simple `html` website, to some extent, helped me land my **first job** in US. 
+
+Back to the old days, building a website required a huge amount of time to carve details in fonts, colors, and styles (e.g., `css`). Developers also need to tune in and monitor tons of `html` parameters. Building a website is an exhausting and time-consuming process. What's more, website maintainance makes the website-build job even harder. My first site was built and hosted on the school's platform. Unfortunately, soon after my graduation, it is expired and could never be retrieved. 
 
 
 Many years later, I happened to learn `rmarkdown` and its R-package from 2019 RStudio conference. Later on, I found a new R package-`blogdown` developed by the same developer who developed `rmarkdown`. Being a long-time R-user, I surprisingly see it provides a tool for R-Users to build a website in R. **Amazing!!** Meanwhile, the connection between `git` and `RStudio` makes website building much easier and smoother. No `Dreamweaver` and `FTP` are needed. Just simply using [RStudio](www.rstudio.com) and [github](www.github.com), anyone can build his own site. 
 
 When I saw it, I got excited. I immediately took in action. After many nights hard works and debugging, I finally built up my first `blogdown` website.The first version of my website was built through `blogdown` with easy theme-`hugo-lithium`. 
 
-The [site](https://ouzhang.netlify.app) adapted theme directly from Yihui Xie's **Blogdown** book.
+The [site](https://ouzhang.netlify.app) adapted a simple theme directly from Yihui Xie's **Blogdown** book.
 
 <div class="figure" style="text-align: center">
 <img src="img/first_webpage.jpg" alt="1st website look" width="80%" />
 <p class="caption">Figure 1: 1st website look</p>
 </div>
 
-As you can see from the picture, it contains a simple layout with some minimum functions. it's a good start but a professional website shouldn't look like that. There must be a better theme to suit my needs-**professional and fancy**. 
+As you can see from the picture, it contains a simple layout with some minimum website functions. it's a good starting point but a professional website shouldn't look like that. There must be better themes to suit my needs-**professional and fancy**. 
 
-Therefore, after some researches and googlings, I found this theme-`Hugo-academic` (see below).  
+Therefore, after some researches and googles, I found this theme-`Hugo-academic` (see below).  
 
 <div class="figure" style="text-align: center">
 <img src="img/hugo-academic.jpg" alt="Hugo Academic Template" width="80%" />
@@ -72,7 +74,7 @@ Therefore, after some researches and googlings, I found this theme-`Hugo-academi
 
 The template looks nice and professional, with many intriguing features. Without any hesitation, I decided to switch my website to this theme. However, complicated feature means troubles. Throughout the theme-switch process, I encountered hundreds of obstacles which lead to countless upsets and frustrations. 
 
-To make it work, I had to rely on online searching and asking questions on `Stack Overflow` to solve/break every **brick wall** I bumped into. it's an unpleasant experience with `99%` of frustrations and `1%` of excitement. Finally, I made it. The website looks nice. You can find how fancy it is by checking the picture below or visiting my [old site](https://ouzhang.rbind.io/).      
+To make it work, I had to rely on online searching and asking questions on [Stack Overflow](https://stackoverflow.com/) to solve/break every **brick wall** I bumped into. it's an unpleasant experience with `99%` of frustrations and `1%` of excitement. Finally, I made it worked. The website looks nice. You can find how fancy it is by checking the picture below or visiting my [old site](https://ouzhang.rbind.io/).      
 
 
 <div class="figure" style="text-align: center">
@@ -80,9 +82,9 @@ To make it work, I had to rely on online searching and asking questions on `Stac
 <p class="caption">Figure 3: 2nd website look</p>
 </div>
 
-Frankly, I love my `Hugo Academic` theme website, it delivered everything I wanted and functioned well. However, since early 2021, `Hugo Academic` switches to `Wowchemy`. This transition makes existing website hard to be updated 😿. Error messages were bounced back every time when I tried to update website or added a new blog post. For that, I had to find a new theme for my website. 
+Frankly, I love my `Hugo Academic` theme website, it delivered everything I wanted and functioned well. However, since early 2021, `Hugo Academic` switches to `Wowchemy`. This transition makes existing website hard to be updated 😭. Error messages were bounced back every time when I tried to update website or added a new blog post. For that, I had to find a new theme for my website. 
 
-Then, I found [Alison Hill](https://www.apreshill.com/) and the [Hugo Apéro](https://hugo-apero-docs.netlify.app/) theme she developed. Making a website theme switch isn't easy. Finally, after a month work, my website has a new look (see below).
+Then, I found [Alison Hill](https://www.apreshill.com/) and the [Hugo Apéro](https://hugo-apero-docs.netlify.app/) theme she developed. Making a website theme switch isn't easy. Eventually after a month work, my website has a new look (see below).
 
 
 <div class="figure" style="text-align: center">
@@ -90,8 +92,8 @@ Then, I found [Alison Hill](https://www.apreshill.com/) and the [Hugo Apéro](ht
 <p class="caption">Figure 4: Current look</p>
 </div>
 
-So this is a simple story about my website evolution. Throughout the whole process, I've encountered so many issues and  
-I understand that it is a long way from knowing `rmarkdown` to having a beautiful website built. Therefore, I decide to layout all the information and resources I saved in the process and I hope these resources could provide a **roadmap** for those who want to build website by yourself but do not have luxuries in time to search them all. I wihs by reviewing this blog post, readers could can cut the corners and get straight to the information you need so that save some of your time could be saved for more meaningful things. 
+This is a simple story about my website evolution. Throughout the whole process, I've encountered so many issues and  
+I understand that it is a long way from knowing `rmarkdown` to having a beautiful website built. Therefore, I decide to layout all the information and resources I collected in the process and I hope these resources could provide a **roadmap** for those who want to build website by yourself but do not have luxuries in time to search them all. I wish by reviewing this blog post, readers could can cut the corners and get straight to the information you need so that save some of your time could be saved for more meaningful things. 
 
 
 # Prerequisite
