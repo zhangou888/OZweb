@@ -85,9 +85,9 @@ Many years later, I happened to learn `rmarkdown` and its R-package from the 201
 
 Meanwhile, the connection between `git` and `RStudio` makes website building much easier and smoother. No `Dreamweaver` and `FTP` are needed. Just simply using [RStudio](www.rstudio.com) and [github](www.github.com), anyone can build his own site. 
 
-When I first touched this r-package, I was excited. An immediate action was taken by my. After many days and nights, hard works and debugging, I finally built up my first `blogdown` website.The first version of my website was built through `blogdown` with easy theme-`hugo-lithium`. 
+When I first touched this r-package, I was excited. An immediate action was taken by myself. After many days and nights, hard works and thousand times of debugging, I finally built up my first `blogdown` website.As always, the first version of my website was not a beauty. But it's a good start, and it has all the functions I need. 
 
-The [site](https://ouzhang.netlify.app) adapted a simple theme directly from Yihui Xie's **Blogdown** book.
+It was built through `blogdown` with easy theme-`hugo-lithium`. The [site](https://ouzhang.netlify.app) adapted a simple theme directly from Yihui Xie's **Blogdown** book.
 
 ```{r fig1, out.width='80%', fig.align='center', fig.pos='h', fig.cap='1st website look',echo = FALSE}
 
@@ -95,9 +95,7 @@ The [site](https://ouzhang.netlify.app) adapted a simple theme directly from Yih
 
 ```
 
-As you can see from the picture, it contains a simple layout with some minimum website functions. it's a good starting point but a professional website shouldn't look like that. There must be better themes to suit my needs-**more professional and fancier**. 
-
-Therefore, after some researches and googlings, I found this theme-`Hugo-academic` (see below).  
+As you can see from the picture, it contains a very simple layout with some minimum website functions. it's a good start but a professional website shouldn't look like that. There must be better themes to suit my needs-**more professional and fancier**. I must find a better theme for my website. I speak to mysellf. So, after some researches and googlings, I found this theme-`Hugo-academic` (see below).  
 
 ```{r fig2, out.width='80%', fig.align='center', fig.pos='h', fig.cap='Hugo Academic Template',echo = FALSE}
 
@@ -119,7 +117,7 @@ To make it work, I had to rely on online searching and asking questions on [Stac
 
 Frankly speaking, until this day, I still love my `Hugo Academic` theme website. It delivers everything I wanted and functions well. However, since early 2021, `Hugo Academic` switches to `Wowchemy` theme. This transition makes existing website update and refresh hard to be done `r emo::ji("sad")`. Error messages bounced back every time when I tried to update website or added some new content to the site. Updating website became an unpleasant activity since the theme switch. I have to find a new theme for my website. I spoke to myself. 
 
-Luckily, I found [Alison Hill](https://www.apreshill.com/) and the [Hugo Apéro](https://hugo-apero-docs.netlify.app/) theme she developed. I love the theme at my first sight. It was simple and content focused. although making a website theme switch isn't easy, I have to go for it. After a month hard work, my website eventually has a new look (see below).
+Luckily, I found [Alison Hill](https://www.apreshill.com/) and the [Hugo Apéro](https://hugo-apero-docs.netlify.app/) theme she developed. I love the theme at my first sight. It was simple and content-focused. Although making a website theme switch isn't easy, I decided go for it. After a month hard work, my website eventually has a new look (see below).
 
 
 ```{r fig4, out.width='80%', fig.align='center', fig.pos='h', fig.cap='Current look',echo = FALSE}
@@ -128,7 +126,9 @@ Luckily, I found [Alison Hill](https://www.apreshill.com/) and the [Hugo Apéro]
 
 ```
 
-This is a simple story about my website evolution. Throughout the whole process, I've encountered so many issues and mistakes I wish I could avoid them during the time I learn to build up website in R. I understand that it is a long way from knowing `rmarkdown` to having a beautiful website built. Therefore, I decide to share my website building experience and layout all the information and resources I collected in the process with you. And I hope these resources could provide a **roadmap** for those who want to build website by yourself but do not have luxuries in time to search them all online. I wish by reviewing this blog post, readers could cut the corners and get straight to the information you need so that save some of your valuable time for more meaningful things. 
+This is a simple story about my website evolution. Throughout the whole process, I've encountered so many issues and mistakes. Debugging and Solving issues cost a huge amount of time. Additionally, I also wasted a lot of time on the online searching and looking for answers to my silly questions. I wish I could avoid them during the time I learn to build up website in R. I understand that it is a long way from knowing `rmarkdown` to having a beautiful website built. 
+
+Therefore, I decide share my website building experience and layout all the information and resources I collected to you. I hope these resources could provide a **roadmap** for those who want to build website by yourself but do not have luxuries in time to search them all online. I wish by reviewing this blog post, readers could cut the corners and get straight to the information you need so that save some of your valuable time for more meaningful things. 
 
 
 # Prerequisite
