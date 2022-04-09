@@ -1,0 +1,150 @@
+---
+title: 'My Useful SAS Resources'
+author: Ou Zhang
+date: '2022-04-05'
+layout: single-sidebar
+show_post_thumbnail: true
+thumbnail_left: true  # for list-sidebar only
+show_author_byline: true
+categories:
+  - SAS
+  - Programming
+  - Coding efficiency
+tags:
+  - SAS
+  - Programming
+  - Coding efficiency
+slug: sas-tips
+draft: no
+lastmod: '2022-04-05T10:59:01-05:00'
+featured: yes
+disable_jquery: no
+image:
+  caption: ''
+  focal_point: Smart
+  preview_only: no
+output:
+  blogdown::html_page:
+    toc: yes
+    number_sections: no
+    toc_depth: 2
+    self_contained: no
+
+---
+
+<!-- adding here-bot cat -->
+{{<here>}} 
+
+
+
+```{r set-global-options, echo = FALSE}
+knitr::opts_chunk$set(eval = TRUE, 
+                      echo = TRUE, 
+                      cache = FALSE,
+                      include = TRUE,
+                      collapse = FALSE,
+                      dependson = NULL,
+                      engine = "R", # Chunks will always have R code, unless noted
+                      error = TRUE,
+                      # root.dir = "C:/Users/uzhanou/Documents/R/markdown/Serena/",
+                      fig.path = "figure/",  # Set the figure options
+                      fig.align = "center", 
+                      fig.width = 6,
+                      fig.height = 6)
+```
+
+```{r silent-packages, echo = FALSE, eval = TRUE, message=FALSE, include = FALSE}
+## Step 2: load required packages 
+packages <- c("tidyverse","dplyr")
+packages <- lapply(packages, FUN = function(x) {
+  if (!require(x, character.only = TRUE)) {
+    install.packages(x)
+    library(x, character.only = TRUE)
+  }  
+})
+
+```
+
+```{r fig1, out.width='60%', fig.align='center', fig.pos='h', fig.cap='SAS Strong',echo = FALSE}
+
+    knitr::include_graphics("figure/sas1.jpg", error = FALSE)
+
+```
+
+# Story
+
+I am not a pure SAS user, but my former jobs (Psychometrics and Assessment) required me to be efficient in SAS. So, I decided beef up my SAS programming skills in the 2017.
+
+## Key Programming Talk
+
+
+The Key programming thought are included in my 2018 talk
+
+
+```{r fig2, out.width='80%', fig.align='center', fig.pos='h', fig.cap='Write Readable Codes',echo = FALSE}
+
+    knitr::include_graphics("figure/write-readable-code.jpg", error = FALSE)
+
+```
+
+**Talk Link: ** [Writing readable codes](https://ouzhang.me/slides/readable_code/readable_code.html#1)
+
+Before you continue reading, I suggest you to go over this talk first.
+
+It covers the key thought of the software development and programming.
+
+```{r fig3, out.width='80%', fig.align='center', fig.pos='h', fig.cap='Software development life cycle',echo = FALSE}
+
+    knitr::include_graphics("figure/software development_life_cycle_methodology.png", error = FALSE)
+
+```
+
+Since I move to different industry, I no longer code in SAS very often. Instead, I usually program in R or Python. But a couple of weeks ago, one of my old friends asked me a SAS trick question, I was glad I can still give her some hints. So, I decide to create a repo at **github** and hope the materials and contents I collected may help anyone in SAS programming, at least, to some extent. 
+
+Back to 2017, I spent a lot time on reading SAS tech white papers. I also spent quite a few time to refactor legacy codes both from my work and my personal toolkit so that it becomes more readable and shorter.
+
+While I was learning, I took some personal notes as well. 
+
+## Key notes  
+The Key notes are listed below.
+
+* [Sas code efficiency notes](https://github.com/zhangou888/OZ_SAS_notes/blob/main/efficiency/SAS_coding_efficiency_notes_OZ.pdf)
+
+* [Sas Macro notes](https://github.com/zhangou888/OZ_SAS_notes/blob/main/macro/SAS_Macro_Notes.docx)
+
+
+# Repo structure
+
+The repo [OZ SAS notes](https://github.com/zhangou888/OZ_SAS_notes) contains 8 sub-folders:
+
+The repo covers all the SAS tech paper I've learned. Hope these materials could give you some help.
+
+
+1. [Efficiency (most useful paper collections for sas programming efficiency)](https://github.com/zhangou888/OZ_SAS_notes/tree/main/efficiency)
+2. [macro (2nd most usefulll paper collections for SAS macro basic definition and rules)](https://github.com/zhangou888/OZ_SAS_notes/tree/main/macro)
+3. [data steps](https://github.com/zhangou888/OZ_SAS_notes/tree/main/data%20steps)
+4. [debug](https://github.com/zhangou888/OZ_SAS_notes/tree/main/debug)
+5. [hash](https://github.com/zhangou888/OZ_SAS_notes/tree/main/hash)
+6. [comment (different SAS comment styles and how to properly comment sas code)](https://github.com/zhangou888/OZ_SAS_notes/tree/main/comment)
+7. [create date](https://github.com/zhangou888/OZ_SAS_notes/tree/main/create%20date)
+8. [code (3 sets of SAS code I think are useful)](https://github.com/zhangou888/OZ_SAS_notes/tree/main/code)
+
+
+# Other source on the internet  
+
+* [SAS tips and tricks](https://www.pauldickman.com/sastips/)
+
+
+ All the best~
+
+
+--- The End ---
+
+
+
+
+
+
+
+
+
